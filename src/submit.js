@@ -4,7 +4,7 @@ import { Button } from "@chakra-ui/react";
 import { useStore } from "./store";
 import { shallow } from "zustand/shallow";
 
-export const SubmitButton = ({ handleSubmit }) => {
+export const SubmitButton = ({ handleSubmit, loading }) => {
   const selector = (state) => ({
     nodes: state.nodes,
   });
@@ -27,6 +27,7 @@ export const SubmitButton = ({ handleSubmit }) => {
       width={"fit-content"}
       onClick={handleSubmit}
       disabled={!nodes?.length}
+      isLoading={loading}
     >
       Submit
     </Button>

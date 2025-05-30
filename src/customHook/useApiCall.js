@@ -5,6 +5,7 @@ import { shallow } from "zustand/shallow";
 
 const useApiCall = (setShowModal) => {
   const { showToast } = useShowToast();
+  const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState();
   const baseurl = "http://127.0.0.1:8000";
   const endpoint = "/pipelines/parse";
@@ -13,6 +14,7 @@ const useApiCall = (setShowModal) => {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${baseurl}${endpoint}`, {
         method: "POST",
         headers: {
@@ -39,10 +41,11 @@ const useApiCall = (setShowModal) => {
           position: "top-right",
           status: "success",
         });
-        setShowModal(true)
+        setShowModal(true);
       }
+      setLoading(false);
     } catch (error) {
-      console.log("err -->",error)
+      setLoading(false);
       showToast({
         description:
           "Backend is not deployed, please run backend server locally.",
@@ -55,7 +58,7 @@ const useApiCall = (setShowModal) => {
     }
   };
 
-  return { handleSubmit,response };
+  return { handleSubmit, response, loading };
 };
 
 export default useApiCall;
