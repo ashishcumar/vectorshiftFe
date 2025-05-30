@@ -1,0 +1,61 @@
+import { useState } from "react";
+import useShowToast from "./useShowToast";
+import { selector, useStore } from "../store";
+import { shallow } from "zustand/shallow";
+
+const useApiCall = (setShowModal) => {
+  const { showToast } = useShowToast();
+  const [response, setResponse] = useState();
+  const baseurl = "http://127.0.0.1:8000";
+  const endpoint = "/pipelines/parse";
+
+  const { nodes, edges } = useStore((state) => state);
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(`${baseurl}${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nodes: nodes,
+          edges: edges,
+        }),
+      });
+
+      const data = await response.json();
+      if (data) {
+        setResponse({
+          nodes: data.num_nodes || 0,
+          edfes: data.num_edges || 0,
+          isDag: data.is_dag || true,
+        });
+        showToast({
+          description: "Form submitted successfully!",
+          title: "Success",
+          duration: 5000,
+          isClosable: true,
+          position: "top-right",
+          status: "success",
+        });
+        setShowModal(true)
+      }
+    } catch (error) {
+      console.log("err -->",error)
+      showToast({
+        description:
+          "Backend is not deployed, please run backend server locally.",
+        title: "Backend Not Deployed.",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+        status: "error",
+      });
+    }
+  };
+
+  return { handleSubmit,response };
+};
+
+export default useApiCall;

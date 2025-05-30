@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+textarea::before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 20px;
+}
+
+.draggableNode:hover svg {
+  color: rgb(99, 102, 241);
+  fill: rgb(99, 102, 241);
+}
+
+.draggableNode:hover div,
+.draggableNode:hover span,
+.draggableNode:hover p {
+  color: rgb(79, 70, 229);
+}
+
+.draggableNode:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: rgb(99, 102, 241);
+  background-color: rgba(99, 102, 241, 0.1);
+}
+
+.react-flow__handle {
+  width: 16px !important;
+  height: 16px !important;
+  border: 1px solid rgb(99, 102, 241) !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+  right: -8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.nodeWrapper {
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #9b9ce0;
+  border-radius: 6px;
+  box-shadow: 0 0 0 1px #9b9ce0;
+  padding: 8px;
+  transition: all 0.2s ease-in-out;
+  color: #6563e4;
+}
+
+.nodeWrapper:hover {
+  box-shadow: 0 0 0 3px #9b9ce0;
+}
+
+.delete{
+  color:black;
+}
+
+.deleteIcon {
+  color: rgba(239,68,68,1);
+  fill: rgba(239,68,68,1);
+}
+
+.tag {
+  color: rgba(239,68,68,1);
+  margin: 0 4px;
+}
+
